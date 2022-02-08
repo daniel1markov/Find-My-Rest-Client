@@ -49,7 +49,7 @@ public class MyController implements ActionListener {
             input.add(phone);
             input.add(rating);
 
-            if (legalStrings(input)) {
+            if (legalStrings(input) && category.length() > 2) {
 
                 input = new ArrayList <>();
                 category = view.restaurantCategoryAdmin.getText().substring(0,1).toUpperCase()
@@ -63,7 +63,7 @@ public class MyController implements ActionListener {
                 phone = view.restaurantPhoneAdmin.getText().substring(0,1).toUpperCase()
                         + view.restaurantPhoneAdmin.getText().substring(1).toLowerCase();
                 rating = view.restaurantRatingAdmin.getText().substring(0,1).toUpperCase()
-                        + view.restaurantRatingAdmin.getText().substring(1).toLowerCase();;
+                        + view.restaurantRatingAdmin.getText().substring(1).toLowerCase();
                 input.add(category);
                 input.add(name);
                 input.add(address);
@@ -71,7 +71,7 @@ public class MyController implements ActionListener {
                 input.add(phone);
                 input.add(rating);
 
-                String response = null;
+                String response = "";
                 try {
                     response = model.addUpdateRest(input);
                 } catch (IOException ioException) {
@@ -87,13 +87,19 @@ public class MyController implements ActionListener {
                     JOptionPane.showMessageDialog( frame, "We having some issues with the server please try again");
 
                 }
-                System.out.println(input);
                 clearAdminRestaurantDetails();
             }
             else
             {
                 clearAdminRestaurantDetails();
-                JOptionPane.showMessageDialog( frame, "One of the fields cannot be empty.");
+                if(category.length() < 3)
+                {
+                    JOptionPane.showMessageDialog( frame, "Category cannot be smaller than 3 letters.");
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame, "One of the fields cannot be empty.");
+                }
             }
 
         }
@@ -108,7 +114,7 @@ public class MyController implements ActionListener {
                         +  view.restaurantNameToDeleteAdmin.getText().substring(1).toLowerCase();
 
 
-                String response = null;
+                String response = "";
                 try {
                     response = model.deleteRest(restNameDelete);
                 } catch (IOException ioException) {
@@ -124,7 +130,6 @@ public class MyController implements ActionListener {
                     JOptionPane.showMessageDialog( frame, "There's no such restaurant: " + restNameDelete);
 
                 }
-                System.out.println(input);
                 clearAdminRestaurantDetails();
             }
             else
@@ -154,7 +159,7 @@ public class MyController implements ActionListener {
 
                 view.dtm[0] = new DefaultTableModel(null, view.columns);
 
-                if (rests.size() == 0) {
+                if (rests == null) {
                     view.restaurantsTable = new JTable(view.dtm[0]);
                     view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
                     view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -190,7 +195,7 @@ public class MyController implements ActionListener {
 
             String searchRestCategory = view.restaurantCategoryUser.getText();
 
-            if (legalString(searchRestCategory)) {
+            if (legalString(searchRestCategory) && searchRestCategory.length() > 2) {
 
                 searchRestCategory = view.restaurantCategoryUser.getText().substring(0, 1).toUpperCase()
                         + view.restaurantCategoryUser.getText().substring(1).toLowerCase();
@@ -233,7 +238,7 @@ public class MyController implements ActionListener {
             else {
 
                 clearUserRestaurantDetails();
-                JOptionPane.showMessageDialog(frame, "One of the fields cannot be empty.");
+                JOptionPane.showMessageDialog(frame, "Category cannot be empty or smaller then 3 letters.");
             }
         }
     }
@@ -261,7 +266,7 @@ public class MyController implements ActionListener {
     {
         for(String s: details)
         {
-            if (s.equals("") || s.equals(null))
+            if (s.equals(""))
             {
                 return false;
             }
@@ -273,11 +278,6 @@ public class MyController implements ActionListener {
 
     public boolean legalString(String details)
     {
-        if (details.equals("") || details.equals(null))
-        {
-            return false;
-        }
-
-        return true;
+        return !details.equals("");
     }
 }

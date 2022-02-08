@@ -48,9 +48,7 @@ public class MyModel {
         Map <String, String> headers = new HashMap <>();
         headers.put("action", action);
         response = sendRequest(headers, name);
-        System.out.println(response.rest);
         return response.rest;
-
     }
 
     public String addUpdateRest(List<String> input) throws IOException {
@@ -87,7 +85,5 @@ public class MyModel {
         Type type = new TypeToken<Response>(){}.getType();
         return  gson.fromJson(reader.next(), type);
     }
-
-
 
 }

@@ -1,5 +1,4 @@
 package com.hit.client;
-import com.google.gson.Gson;
 import java.util.List;
 
 public class Response {
