@@ -183,6 +183,7 @@ public class MyController implements ActionListener {
                 }
             }
             else {
+
                 clearUserRestaurantDetails();
                 JOptionPane.showMessageDialog(frame, "One of the fields cannot be empty.");
             }
