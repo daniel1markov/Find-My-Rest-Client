@@ -34,18 +34,54 @@ public class MyModel {
 
     public List<Restaurant> getByCategory(String category) throws IOException {
         String action = "GetCategory";
-        response = sendRequest(action, category);
+        Map <String, String> headers = new HashMap <>();
+        headers.put("action", action);
+        response = sendRequest(headers, category);
         System.out.println(response.rest);
         return response.rest;
     }
 
-    public  Response sendRequest(String action, String body) throws IOException {
+
+    public List<Restaurant> getByName(String name) throws IOException {
+
+        String action = "GetName";
+        Map <String, String> headers = new HashMap <>();
+        headers.put("action", action);
+        response = sendRequest(headers, name);
+        System.out.println(response.rest);
+        return response.rest;
+
+    }
+
+    public String addUpdateRest(List<String> input) throws IOException {
+
+        String action = "Add/Update";
+        Map <String, String> headers = new HashMap <>();
+        headers.put("action", action);
+        headers.put("Category", input.get(0));
+        headers.put("Name", input.get(1));
+        headers.put("Address", input.get(2));
+        headers.put("City", input.get(3));
+        headers.put("PhoneNumber", input.get(4));
+        headers.put("Rating", input.get(5));
+        response = sendRequest(headers, "Add/Update");
+        return response.json;
+
+    }
+
+    public String deleteRest(String restNameDelete) throws IOException {
+        String action = "Delete";
+        Map <String, String> headers = new HashMap <>();
+        headers.put("action", action);
+        response = sendRequest(headers, restNameDelete);
+        return response.json;
+    }
+
+    public  Response sendRequest(Map <String, String> headers, String body) throws IOException {
         toServer = new Socket("localhost", port);
         writer = new PrintWriter(toServer.getOutputStream());
         reader = new Scanner(toServer.getInputStream());
-        Map <String, String> headers = new HashMap <>();
-        headers.put("action", action);
-        Request request = new Request(headers, body);
+        request = new Request(headers, body);
         writer.println(gson.toJson(request));
         writer.flush();
         Type type = new TypeToken<Response>(){}.getType();
@@ -53,12 +89,5 @@ public class MyModel {
     }
 
 
-    public List<Restaurant> getByName(String name) throws IOException {
 
-        String action = "GetName";
-        response = sendRequest(action, name);
-        System.out.println(response.rest);
-        return response.rest;
-
-    }
 }

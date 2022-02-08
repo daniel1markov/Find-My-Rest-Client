@@ -16,7 +16,7 @@ public class MyController implements ActionListener {
 
     View view;
     MyModel model;
-    List<String> input = new ArrayList <>();
+    List<String> input ;
 
     public MyController(View view, MyModel model){
         this.view = view;
@@ -34,32 +34,64 @@ public class MyController implements ActionListener {
         JFrame frame = this.view;
 
         if(e.getSource() == view.addUpdateRestButton) {
-            String category = view.restaurantCategoryAdmin.getText().substring(0,1).toUpperCase()
-                    + view.restaurantCategoryAdmin.getText().substring(1).toLowerCase();
-            String name = view.restaurantNameAdmin.getText().substring(0,1).toUpperCase()
-                    +view.restaurantNameAdmin.getText().substring(1).toLowerCase();
-            String address = view.restaurantAddressAdmin.getText().substring(0,1).toUpperCase()
-                    + view.restaurantAddressAdmin.getText().substring(1).toLowerCase();
-            String city = view.restaurantCityAdmin.getText().substring(0,1).toUpperCase()
-                    + view.restaurantCityAdmin.getText().substring(1).toLowerCase();
-            String phone = view.restaurantPhoneAdmin.getText().substring(0,1).toUpperCase()
-                    + view.restaurantPhoneAdmin.getText().substring(1).toLowerCase();
-            String rating = view.restaurantRatingAdmin.getText().substring(0,1).toUpperCase()
-                    + view.restaurantRatingAdmin.getText().substring(1).toLowerCase();;
+
+            input = new ArrayList <>();
+            String category = view.restaurantCategoryAdmin.getText();
+            String name = view.restaurantNameAdmin.getText();
+            String address = view.restaurantAddressAdmin.getText();
+            String city = view.restaurantCityAdmin.getText();
+            String phone = view.restaurantPhoneAdmin.getText();
+            String rating = view.restaurantRatingAdmin.getText();
             input.add(category);
             input.add(name);
             input.add(address);
             input.add(city);
             input.add(phone);
             input.add(rating);
+
             if (legalStrings(input)) {
-                // model.addRest(input);
+
+                input = new ArrayList <>();
+                category = view.restaurantCategoryAdmin.getText().substring(0,1).toUpperCase()
+                        + view.restaurantCategoryAdmin.getText().substring(1).toLowerCase();
+                name = view.restaurantNameAdmin.getText().substring(0,1).toUpperCase()
+                        +view.restaurantNameAdmin.getText().substring(1).toLowerCase();
+                address = view.restaurantAddressAdmin.getText().substring(0,1).toUpperCase()
+                        + view.restaurantAddressAdmin.getText().substring(1).toLowerCase();
+                city = view.restaurantCityAdmin.getText().substring(0,1).toUpperCase()
+                        + view.restaurantCityAdmin.getText().substring(1).toLowerCase();
+                phone = view.restaurantPhoneAdmin.getText().substring(0,1).toUpperCase()
+                        + view.restaurantPhoneAdmin.getText().substring(1).toLowerCase();
+                rating = view.restaurantRatingAdmin.getText().substring(0,1).toUpperCase()
+                        + view.restaurantRatingAdmin.getText().substring(1).toLowerCase();;
+                input.add(category);
+                input.add(name);
+                input.add(address);
+                input.add(city);
+                input.add(phone);
+                input.add(rating);
+
+                String response = null;
+                try {
+                    response = model.addUpdateRest(input);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                if( response.equals("OK"))
+                {
+                    JOptionPane.showMessageDialog( frame, name + " Restaurant was added successfully");
+
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog( frame, "We having some issues with the server please try again");
+
+                }
                 System.out.println(input);
                 clearAdminRestaurantDetails();
-                JOptionPane.showMessageDialog( frame, "Restaurant " + name + " was added successfully");
             }
-            else{
-
+            else
+            {
                 clearAdminRestaurantDetails();
                 JOptionPane.showMessageDialog( frame, "One of the fields cannot be empty.");
             }
@@ -68,22 +100,38 @@ public class MyController implements ActionListener {
 
         if(e.getSource() == view.deleteRestButton)
         {
-            String restNameDelete = view.restaurantNameToDeleteAdmin.getText().substring(0,1).toUpperCase()
-                    +  view.restaurantNameToDeleteAdmin.getText().substring(1).toLowerCase();
+            String restNameDelete = view.restaurantNameToDeleteAdmin.getText();
             if(legalString(restNameDelete))
             {
-                //bool? =  model.deleteRest(restnameDelete)
-                //if(bool) -> JOptionPane.showMessageDialog( frame, "Restaurant " + name + " was deleted successfully");
-                //else -> JOptionPane.showMessageDialog( frame, "Restaurant " + name + " wasn't exist");
 
+                restNameDelete = view.restaurantNameToDeleteAdmin.getText().substring(0,1).toUpperCase()
+                        +  view.restaurantNameToDeleteAdmin.getText().substring(1).toLowerCase();
+
+
+                String response = null;
+                try {
+                    response = model.deleteRest(restNameDelete);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                if( response.equals("OK"))
+                {
+                    JOptionPane.showMessageDialog( frame, restNameDelete + " Restaurant was deleted successfully");
+
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog( frame, "There's no such restaurant: " + restNameDelete);
+
+                }
+                System.out.println(input);
                 clearAdminRestaurantDetails();
-
             }
-            else{
+            else
+            {
                 clearAdminRestaurantDetails();
                 JOptionPane.showMessageDialog( frame, "One of the fields cannot be empty.");
             }
-
 
         }
 
