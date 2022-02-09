@@ -176,6 +176,7 @@ public class View extends JFrame  {
 
         exitFromAdminAuthorizationButton.addActionListener(e->{
 
+            adminPassword.setText("");
             adminAuthorization.setVisible(false);
             homeScreenPanel.setVisible(true);
         });
@@ -201,6 +202,13 @@ public class View extends JFrame  {
 
         exitFromAdminButton.addActionListener(e->{
 
+            restaurantCategoryAdmin.setText("");
+            restaurantNameAdmin.setText("");
+            restaurantAddressAdmin.setText("");
+            restaurantCityAdmin.setText("");
+            restaurantPhoneAdmin.setText("");
+            restaurantRatingAdmin.setText("");
+            restaurantNameToDeleteAdmin.setText("");
             adminPanel.setVisible(false);
             homeScreenPanel.setVisible(true);
         });
@@ -330,14 +338,7 @@ public class View extends JFrame  {
     //------------------------------------User Side-----------------------------------------//
     //---------------------------------------------------------------------------------------//
 
-        exitFromUserButton.setBounds(834,0,50,20);
-        exitFromUserButton.setBackground(greyColor);
-        exitFromUserButton.setBorder(border);
 
-        exitFromUserButton.addActionListener(e->{
-            userPanel.setVisible(false);
-            homeScreenPanel.setVisible(true);
-        });
 
         findRestByNameText.setFont(new Font("Default", Font.ITALIC, 25 ));
         findRestByNameText.setForeground(greyColor);
@@ -377,6 +378,17 @@ public class View extends JFrame  {
         restPanel = new JScrollPane[]{new JScrollPane(restaurantsTable)};
         restPanel[0].setBounds(400, 20, 450, 200);
 
+
+        exitFromUserButton.setBounds(834,0,50,20);
+        exitFromUserButton.setBackground(greyColor);
+        exitFromUserButton.setBorder(border);
+
+        exitFromUserButton.addActionListener(e->{
+            restaurantCategoryUser.setText("");
+            restaurantNameUser.setText("");
+            userPanel.setVisible(false);
+            homeScreenPanel.setVisible(true);
+        });
 
         userPanel.add(restPanel[0]);
         userPanel.add(exitFromUserButton);

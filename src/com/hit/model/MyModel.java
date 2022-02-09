@@ -7,7 +7,6 @@ import com.hit.client.Request;
 import com.hit.client.Response;
 import com.hit.client.Restaurant;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.net.Socket;
@@ -32,17 +31,16 @@ public class MyModel {
     }
 
 
-    public List<Restaurant> getByCategory(String category) throws IOException {
+    public List<Restaurant> getByCategory(String category)  {
         String action = "GetCategory";
         Map <String, String> headers = new HashMap <>();
         headers.put("action", action);
         response = sendRequest(headers, category);
-        System.out.println(response.rest);
         return response.rest;
     }
 
 
-    public List<Restaurant> getByName(String name) throws IOException {
+    public List<Restaurant> getByName(String name){
 
         String action = "GetName";
         Map <String, String> headers = new HashMap <>();
@@ -51,7 +49,7 @@ public class MyModel {
         return response.rest;
     }
 
-    public String addUpdateRest(List<String> input) throws IOException {
+    public String addUpdateRest(List<String> input) {
 
         String action = "Add/Update";
         Map <String, String> headers = new HashMap <>();
@@ -67,7 +65,7 @@ public class MyModel {
 
     }
 
-    public String deleteRest(String restNameDelete) throws IOException {
+    public String deleteRest(String restNameDelete) {
         String action = "Delete";
         Map <String, String> headers = new HashMap <>();
         headers.put("action", action);
@@ -75,15 +73,26 @@ public class MyModel {
         return response.json;
     }
 
-    public  Response sendRequest(Map <String, String> headers, String body) throws IOException {
-        toServer = new Socket("localhost", port);
-        writer = new PrintWriter(toServer.getOutputStream());
-        reader = new Scanner(toServer.getInputStream());
-        request = new Request(headers, body);
-        writer.println(gson.toJson(request));
-        writer.flush();
-        Type type = new TypeToken<Response>(){}.getType();
-        return  gson.fromJson(reader.next(), type);
+    public  Response sendRequest(Map <String, String> headers, String body)  {
+
+        try {
+            toServer = new Socket("localhost", port);
+            writer = new PrintWriter(toServer.getOutputStream());
+            reader = new Scanner(toServer.getInputStream());
+            request = new Request(headers, body);
+            writer.println(gson.toJson(request));
+            writer.flush();
+            Type type = new TypeToken <Response>() {
+            }.getType();
+            response = gson.fromJson(reader.next(), type);
+            writer.close();
+            reader.close();
+            toServer.close();
+            return response;
+        }
+        catch (Exception ex){ ex.printStackTrace();}
+        return new Response("Error");
+
     }
 
 }
