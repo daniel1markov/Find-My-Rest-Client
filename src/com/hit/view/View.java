@@ -373,8 +373,9 @@ public class View extends JFrame  {
 
 
 
-        restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         restaurantsTable.getTableHeader().setReorderingAllowed(false);
+        restaurantsTable.setAutoCreateColumnsFromModel(false);
+        restaurantsTable.getTableHeader().setResizingAllowed(false);
         restPanel = new JScrollPane[]{new JScrollPane(restaurantsTable)};
         restPanel[0].setBounds(400, 20, 450, 200);
 

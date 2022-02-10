@@ -147,7 +147,10 @@ public class MyController implements ActionListener {
                 if (rests == null) {
                     view.restaurantsTable = new JTable(view.dtm[0]);
                     view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
+
+                    //view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                     //view.userPanel.remove(view.restPanel[0]);
                     view.restPanel[0] = new JScrollPane(view.restaurantsTable);
                     view.restPanel[0].setBounds(400, 20, 450, 200);
@@ -162,7 +165,10 @@ public class MyController implements ActionListener {
                     }
                     view.restaurantsTable = new JTable(view.dtm[0]);
                     view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
+
+                    //view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                     //view.userPanel.remove(view.restPanel[0]);
                     view.restPanel[0] = new JScrollPane(view.restaurantsTable);
                     view.restPanel[0].setBounds(400, 20, 450, 200);
@@ -175,7 +181,10 @@ public class MyController implements ActionListener {
                 view.dtm[0] = new DefaultTableModel(null, view.columns);
                 view.restaurantsTable = new JTable(view.dtm[0]);
                 view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+                view.restaurantsTable.getTableHeader().setResizingAllowed(false);
+
+                //view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                 //view.userPanel.remove(view.restPanel[0]);
                 view.restPanel[0] = new JScrollPane(view.restaurantsTable);
                 view.restPanel[0].setBounds(400, 20, 450, 200);
@@ -200,7 +209,8 @@ public class MyController implements ActionListener {
                 if (rests == null) {
                     view.restaurantsTable = new JTable(view.dtm[0]);
                     view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
                     //view.userPanel.remove(view.restPanel[0]);
                     view.restPanel[0] = new JScrollPane(view.restaurantsTable);
                     view.restPanel[0].setBounds(400, 20, 450, 200);
@@ -216,7 +226,8 @@ public class MyController implements ActionListener {
                     }
                     view.restaurantsTable = new JTable(view.dtm[0]);
                     view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
                     //view.userPanel.remove(view.restPanel[0]);
                     view.restPanel[0] = new JScrollPane(view.restaurantsTable);
                     view.restPanel[0].setBounds(400, 20, 450, 200);
@@ -229,7 +240,8 @@ public class MyController implements ActionListener {
                 view.dtm[0] = new DefaultTableModel(null, view.columns);
                 view.restaurantsTable = new JTable(view.dtm[0]);
                 view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+                view.restaurantsTable.getTableHeader().setResizingAllowed(false);
                 //view.userPanel.remove(view.restPanel[0]);
                 view.restPanel[0] = new JScrollPane(view.restaurantsTable);
                 view.restPanel[0].setBounds(400, 20, 450, 200);
