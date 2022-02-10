@@ -73,6 +73,14 @@ public class MyModel {
         return response.json;
     }
 
+    public List<Restaurant> getAll() {
+        String action = "GetAll";
+        Map <String, String> headers = new HashMap <>();
+        headers.put("action", action);
+        response = sendRequest(headers, "");
+        return response.rest;
+    }
+
     public  Response sendRequest(Map <String, String> headers, String body)  {
 
         try {
@@ -94,5 +102,6 @@ public class MyModel {
         return new Response("Error");
 
     }
+
 
 }

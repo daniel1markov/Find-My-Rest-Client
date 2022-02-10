@@ -21,7 +21,7 @@ public class View extends JFrame  {
     public JButton adminButton = new JButton("Enter as Admin");
     public JButton userButton = new JButton("Enter as User");
     public JButton exitFromAdminAuthorizationButton = new JButton("Go Back");
-    public JButton exitFromAdminButton = new JButton("Go Back");
+    public JButton exitFromAdminButton = new JButton("Logout");
     public JButton exitFromUserButton = new JButton("Go Back");  
 
 
@@ -55,6 +55,7 @@ public class View extends JFrame  {
     public JTextArea findRestByNameText = new JTextArea("Find restaurants by name");
     public JTextField restaurantNameUser = new JTextField();
     public JTextField restaurantCategoryUser = new JTextField();
+    public JButton searchAllButton = new JButton("Search All");
     public JButton searchByNameButton = new JButton("Search by name");
     public JButton searchByCategoryButton = new JButton("Search by category");
 
@@ -358,26 +359,31 @@ public class View extends JFrame  {
 
         findRestByCategoryText.setFont(new Font("Default", Font.ITALIC, 25 ));
         findRestByCategoryText.setForeground(greyColor);
-        findRestByCategoryText.setBounds(50, 300, 400, 50);
+        findRestByCategoryText.setBounds(500, 20, 400, 50);
         findRestByCategoryText.setOpaque(false);
         findRestByCategoryText.setEditable(false);
 
-        restaurantCategoryUser.setBounds(110,350,200,25);
+        restaurantCategoryUser.setBounds(560,70,200,25);
         restaurantCategoryUser.setBorder(border);
 
 
-        searchByCategoryButton.setBounds(110,405,200,50);
+        searchByCategoryButton.setBounds(560,125,200,50);
         searchByCategoryButton.setBackground(greyColor);
         searchByCategoryButton.setBorder(border);
         searchByCategoryButton.setFocusPainted(false);
 
+
+        searchAllButton.setBounds(110,200,200,50);
+        searchAllButton.setBackground(greyColor);
+        searchAllButton.setBorder(border);
+        searchAllButton.setFocusPainted(false);
 
 
         restaurantsTable.getTableHeader().setReorderingAllowed(false);
         restaurantsTable.setAutoCreateColumnsFromModel(false);
         restaurantsTable.getTableHeader().setResizingAllowed(false);
         restPanel = new JScrollPane[]{new JScrollPane(restaurantsTable)};
-        restPanel[0].setBounds(400, 20, 450, 200);
+        //restPanel[0].setBounds(100, 400, 700, 130);
 
 
         exitFromUserButton.setBounds(834,0,50,20);
@@ -391,7 +397,7 @@ public class View extends JFrame  {
             homeScreenPanel.setVisible(true);
         });
 
-        userPanel.add(restPanel[0]);
+        //userPanel.add(restPanel[0]);
         userPanel.add(exitFromUserButton);
         userPanel.add(findRestByNameText);
         userPanel.add(restaurantNameUser);
@@ -399,6 +405,8 @@ public class View extends JFrame  {
         userPanel.add(findRestByCategoryText);
         userPanel.add(restaurantCategoryUser);
         userPanel.add(searchByCategoryButton);
+        userPanel.add(searchAllButton);
+
 
         userPanel.add(UserBack);
         this.setVisible(true);

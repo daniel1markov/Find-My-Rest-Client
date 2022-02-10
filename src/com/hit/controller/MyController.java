@@ -25,6 +25,7 @@ public class MyController implements ActionListener {
         this.view.searchByCategoryButton.addActionListener(this);
         this.view.addUpdateRestButton.addActionListener(this);
         this.view.deleteRestButton.addActionListener(this);
+        this.view.searchAllButton.addActionListener(this);
     }
 
     @Override
@@ -74,12 +75,10 @@ public class MyController implements ActionListener {
                 if( response.equals("OK"))
                 {
                     JOptionPane.showMessageDialog( frame, name + " Restaurant was added successfully");
-
                 }
                 else
                 {
                     JOptionPane.showMessageDialog( frame, "We having some issues with the server please try again");
-
                 }
                 clearAdminRestaurantDetails();
             }
@@ -91,11 +90,11 @@ public class MyController implements ActionListener {
                     JOptionPane.showMessageDialog( frame, "Category cannot be smaller than 3 letters.");
 
                 }
-                else {
+                else
+                {
                     JOptionPane.showMessageDialog(frame, "Fields cannot be empty or contain whitespaces.");
                 }
             }
-
         }
 
         if(e.getSource() == view.deleteRestButton)
@@ -106,8 +105,6 @@ public class MyController implements ActionListener {
 
                 restNameDelete = view.restaurantNameToDeleteAdmin.getText().substring(0,1).toUpperCase()
                         +  view.restaurantNameToDeleteAdmin.getText().substring(1).toLowerCase();
-
-
                 String response = model.deleteRest(restNameDelete);
 
                 if( response.equals("OK"))
@@ -127,9 +124,54 @@ public class MyController implements ActionListener {
                 clearAdminRestaurantDetails();
                 JOptionPane.showMessageDialog( frame, "Fields cannot be empty or contain whitespaces.");
             }
-
         }
 
+        if(e.getSource() == view.deleteRestButton)
+        {
+            String restNameDelete = view.restaurantNameToDeleteAdmin.getText();
+            if(legalString(restNameDelete))
+            {
+
+                restNameDelete = view.restaurantNameToDeleteAdmin.getText().substring(0,1).toUpperCase()
+                        +  view.restaurantNameToDeleteAdmin.getText().substring(1).toLowerCase();
+                String response = model.deleteRest(restNameDelete);
+
+                if( response.equals("OK"))
+                {
+                    JOptionPane.showMessageDialog( frame, restNameDelete + " Restaurant was deleted successfully");
+
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog( frame, "There's no such restaurant: " + restNameDelete);
+
+                }
+                clearAdminRestaurantDetails();
+            }
+            else
+            {
+                clearAdminRestaurantDetails();
+                JOptionPane.showMessageDialog( frame, "Fields cannot be empty or contain whitespaces.");
+            }
+        }
+
+        if(e.getSource() == view.searchAllButton)
+        {
+            List <Restaurant> rests = null;
+            rests = model.getAll();
+
+            if (rests == null)
+            {
+                clearTable();
+                clearUserRestaurantDetails();
+                JOptionPane.showMessageDialog(frame, "We have some error with server, please try again");
+            }
+            else
+            {
+                setNewTable(rests);
+                clearUserRestaurantDetails();
+            }
+        }
 
         if(e.getSource() == view.searchByNameButton)
         {
@@ -139,63 +181,30 @@ public class MyController implements ActionListener {
 
                 searchRestName = view.restaurantNameUser.getText().substring(0, 1).toUpperCase()
                         + view.restaurantNameUser.getText().substring(1).toLowerCase();
-
                 List <Restaurant> rests = null;
                 rests = model.getByName(searchRestName);
-                view.dtm[0] = new DefaultTableModel(null, view.columns);
 
-                if (rests == null) {
-                    view.restaurantsTable = new JTable(view.dtm[0]);
-                    view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
-                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
-
-                    //view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                    //view.userPanel.remove(view.restPanel[0]);
-                    view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-                    view.restPanel[0].setBounds(400, 20, 450, 200);
-                    view.userPanel.add(view.restPanel[0]);
+                if (rests == null)
+                {
+                    clearTable();
                     clearUserRestaurantDetails();
                     JOptionPane.showMessageDialog(frame, "Restaurant " + searchRestName + " doesn't exist");
-                } else {
-
-                    for (Restaurant r : rests) {
-                        view.dtm[0].addRow(new Object[]{r.getCategory(), r.getName(),
-                                r.getAddress(), r.getCity(), r.getPhoneNumber(), r.getRating()});
-                    }
-                    view.restaurantsTable = new JTable(view.dtm[0]);
-                    view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
-                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
-
-                    //view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                    //view.userPanel.remove(view.restPanel[0]);
-                    view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-                    view.restPanel[0].setBounds(400, 20, 450, 200);
-                    view.userPanel.add(view.restPanel[0]);
+                }
+                else
+                {
+                    setNewTable(rests);
                     clearUserRestaurantDetails();
-
                 }
             }
-            else {
-                view.dtm[0] = new DefaultTableModel(null, view.columns);
-                view.restaurantsTable = new JTable(view.dtm[0]);
-                view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                view.restaurantsTable.setAutoCreateColumnsFromModel(false);
-                view.restaurantsTable.getTableHeader().setResizingAllowed(false);
-
-                //view.restaurantsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                //view.userPanel.remove(view.restPanel[0]);
-                view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-                view.restPanel[0].setBounds(400, 20, 450, 200);
-                view.userPanel.add(view.restPanel[0]);
+            else
+            {
+                clearTable();
                 clearUserRestaurantDetails();
                 JOptionPane.showMessageDialog(frame, "Fields cannot be empty or contain whitespaces.");
             }
         }
 
         if(e.getSource() == view.searchByCategoryButton) {
-
             String searchRestCategory = view.restaurantCategoryUser.getText();
 
             if (legalString(searchRestCategory) && searchRestCategory.length() > 2) {
@@ -204,48 +213,21 @@ public class MyController implements ActionListener {
                         + view.restaurantCategoryUser.getText().substring(1).toLowerCase();
                 List <Restaurant> rests = null;
                 rests = model.getByCategory(searchRestCategory);
-                view.dtm[0] = new DefaultTableModel(null, view.columns);
 
                 if (rests == null) {
-                    view.restaurantsTable = new JTable(view.dtm[0]);
-                    view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
-                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
-                    //view.userPanel.remove(view.restPanel[0]);
-                    view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-                    view.restPanel[0].setBounds(400, 20, 450, 200);
-                    view.userPanel.add(view.restPanel[0]);
+                    clearTable();
                     clearUserRestaurantDetails();
-
                     JOptionPane.showMessageDialog(frame, "Category " + searchRestCategory + " doesn't exist");
-                } else {
-
-                    for (Restaurant r : rests) {
-                        view.dtm[0].addRow(new Object[]{r.getCategory(), r.getName(),
-                                r.getAddress(), r.getCity(), r.getPhoneNumber(), r.getRating()});
-                    }
-                    view.restaurantsTable = new JTable(view.dtm[0]);
-                    view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                    view.restaurantsTable.setAutoCreateColumnsFromModel(false);
-                    view.restaurantsTable.getTableHeader().setResizingAllowed(false);
-                    //view.userPanel.remove(view.restPanel[0]);
-                    view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-                    view.restPanel[0].setBounds(400, 20, 450, 200);
-                    view.userPanel.add(view.restPanel[0]);
+                }
+                else
+                {
+                    setNewTable(rests);
                     clearUserRestaurantDetails();
-
                 }
             }
-            else {
-                view.dtm[0] = new DefaultTableModel(null, view.columns);
-                view.restaurantsTable = new JTable(view.dtm[0]);
-                view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
-                view.restaurantsTable.setAutoCreateColumnsFromModel(false);
-                view.restaurantsTable.getTableHeader().setResizingAllowed(false);
-                //view.userPanel.remove(view.restPanel[0]);
-                view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-                view.restPanel[0].setBounds(400, 20, 450, 200);
-                view.userPanel.add(view.restPanel[0]);
+            else
+            {
+                clearTable();
                 clearUserRestaurantDetails();
                 JOptionPane.showMessageDialog(frame, "Category cannot be empty contain whitespaces or smaller then 3 letters.");
             }
@@ -253,6 +235,38 @@ public class MyController implements ActionListener {
     }
 
 
+    public void setNewTable(List<Restaurant> restaurants)
+    {
+        view.userPanel.remove(view.restPanel[0]);
+        view.dtm[0] = new DefaultTableModel(null, view.columns);
+        for (Restaurant restaurant : restaurants) {
+            view.dtm[0].addRow(new Object[]{restaurant.getCategory(), restaurant.getName(),
+                    restaurant.getAddress(), restaurant.getCity(), restaurant.getPhoneNumber(), restaurant.getRating()});
+        }
+        view.restaurantsTable = new JTable(view.dtm[0]);
+        view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
+        view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+        view.restaurantsTable.getTableHeader().setResizingAllowed(false);
+        view.restaurantsTable.setEnabled(false);
+        view.restPanel[0] = new JScrollPane(view.restaurantsTable);
+        view.restPanel[0].setBounds(100, 400, 700, 130);
+        view.userPanel.add(view.restPanel[0]);
+    }
+
+    public  void clearTable()
+    {
+        view.userPanel.remove(view.restPanel[0]);
+        view.dtm[0] = new DefaultTableModel(null, view.columns);
+        view.restaurantsTable = new JTable(view.dtm[0]);
+        view.restaurantsTable.getTableHeader().setReorderingAllowed(false);
+        view.restaurantsTable.setAutoCreateColumnsFromModel(false);
+        view.restaurantsTable.getTableHeader().setResizingAllowed(false);
+        view.restaurantsTable.setEnabled(false);
+        view.restPanel[0] = new JScrollPane(view.restaurantsTable);
+        view.restPanel[0].setBounds(100, 400, 700, 130);
+        view.userPanel.add(view.restPanel[0]);
+
+    }
     public void clearAdminRestaurantDetails()
     {
         view.restaurantCategoryAdmin.setText("");
@@ -283,7 +297,6 @@ public class MyController implements ActionListener {
 
         return true;
     }
-
 
     public boolean legalString(String details)
     {
