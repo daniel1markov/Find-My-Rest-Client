@@ -73,7 +73,7 @@ public class View extends JFrame  {
     ImagePanel AdminBack = new ImagePanel(
             new ImageIcon("src/com/hit/view/AdminPage.jpg").getImage());
     ImagePanel UserBack = new ImagePanel(
-            new ImageIcon("src/com/hit/view/3.jpg").getImage());
+            new ImageIcon("src/com/hit/view/UserPage.jpg").getImage());
 
 
 
