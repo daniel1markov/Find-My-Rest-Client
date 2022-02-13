@@ -10,7 +10,6 @@ public class MVCDriver {
     {
         View view = new View();
         MyModel myModel = new MyModel(12345);
-
         new MyController(view, myModel);
     }
 }

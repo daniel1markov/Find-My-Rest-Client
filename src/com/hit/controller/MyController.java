@@ -1,6 +1,6 @@
 package com.hit.controller;
 
-import com.hit.client.Restaurant;
+import com.hit.model.Restaurant;
 import com.hit.model.MyModel;
 import com.hit.view.View;
 

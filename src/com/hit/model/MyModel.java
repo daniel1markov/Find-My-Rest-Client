@@ -3,9 +3,6 @@ package com.hit.model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.hit.client.Request;
-import com.hit.client.Response;
-import com.hit.client.Restaurant;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
