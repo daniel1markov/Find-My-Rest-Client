@@ -73,7 +73,7 @@ public class View extends JFrame  {
     ImagePanel AdminBack = new ImagePanel(
             new ImageIcon("src/com/hit/view/AdminPage.jpg").getImage());
     ImagePanel UserBack = new ImagePanel(
-            new ImageIcon("src/com/hit/view/AdminPage.jpg").getImage());
+            new ImageIcon("src/com/hit/view/3.jpg").getImage());
 
 
 
@@ -146,12 +146,12 @@ public class View extends JFrame  {
 
         Color darkGreyColor = new Color(102, 102, 102);
         Color greyColor = new Color(173, 173, 173);
-        adminPassword.setBounds(80,90,250,25);
+        adminPassword.setBounds(100,110,250,25);
         adminPassword.setBorder(border);
 
         loginText.setFont(new Font("Default", Font.ITALIC, 20 ));
         loginText.setForeground(darkGreyColor);
-        loginText.setBounds(50, 40, 350, 50);
+        loginText.setBounds(70, 60, 350, 50);
         loginText.setOpaque(false);
         loginText.setEditable(false);
 
@@ -170,7 +170,7 @@ public class View extends JFrame  {
           adminPassword.setText("");
 
         });
-        submitPasswordButton.setBounds(135,140,150,30);
+        submitPasswordButton.setBounds(155,160,150,30);
         submitPasswordButton.setBackground(greyColor);
         submitPasswordButton.setBorder(border);
         submitPasswordButton.setFocusPainted(false);
@@ -234,66 +234,66 @@ public class View extends JFrame  {
 
         categoryText.setFont(new Font("Default", Font.ITALIC, 15 ));
         categoryText.setForeground(blackColor);
-        categoryText.setBounds(0, 90, 150, 30);
+        categoryText.setBounds(2, 90, 150, 30);
         categoryText.setOpaque(false);
         categoryText.setEditable(false);
 
-        restaurantCategoryAdmin.setBounds(180,90,150,25);
+        restaurantCategoryAdmin.setBounds(182,90,150,25);
         restaurantCategoryAdmin.setBorder(border);
 
 
         nameText.setFont(new Font("Default", Font.ITALIC, 15 ));
         nameText.setForeground(blackColor);
-        nameText.setBounds(0, 140, 150, 30);
+        nameText.setBounds(2, 140, 150, 30);
         nameText.setOpaque(false);
         nameText.setEditable(false);
 
-        restaurantNameAdmin.setBounds(180,140,150,25);
+        restaurantNameAdmin.setBounds(182,140,150,25);
         restaurantNameAdmin.setBorder(border);
 
         addressText.setFont(new Font("Default", Font.ITALIC, 15 ));
         addressText.setForeground(blackColor);
-        addressText.setBounds(0, 190, 150, 30);
+        addressText.setBounds(2, 190, 150, 30);
         addressText.setOpaque(false);
         addressText.setEditable(false);
 
 
-        restaurantAddressAdmin.setBounds(180,190,150,25);
+        restaurantAddressAdmin.setBounds(182,190,150,25);
         restaurantAddressAdmin.setBorder(border);
 
 
         cityText.setFont(new Font("Default", Font.ITALIC, 15 ));
         cityText.setForeground(blackColor);
-        cityText.setBounds(0, 240, 150, 30);
+        cityText.setBounds(2, 240, 150, 30);
         cityText.setOpaque(false);
         cityText.setEditable(false);
 
-        restaurantCityAdmin.setBounds(180,240,150,25);
+        restaurantCityAdmin.setBounds(182,240,150,25);
         restaurantCityAdmin.setBorder(border);
 
         phoneNumberText.setFont(new Font("Default", Font.ITALIC, 15 ));
         phoneNumberText.setForeground(blackColor);
-        phoneNumberText.setBounds(0, 290, 180, 30);
+        phoneNumberText.setBounds(2, 290, 180, 30);
         phoneNumberText.setOpaque(false);
         phoneNumberText.setEditable(false);
 
 
-        restaurantPhoneAdmin.setBounds(180,290,150,25);
+        restaurantPhoneAdmin.setBounds(182,290,150,25);
         restaurantPhoneAdmin.setBorder(border);
 
 
         ratingText.setFont(new Font("Default", Font.ITALIC, 15 ));
         ratingText.setForeground(blackColor);
-        ratingText.setBounds(0, 340, 150, 30);
+        ratingText.setBounds(2, 340, 150, 30);
         ratingText.setOpaque(false);
         ratingText.setEditable(false);
 
 
-        restaurantRatingAdmin.setBounds(180,340,150,25);
+        restaurantRatingAdmin.setBounds(182,340,150,25);
         restaurantRatingAdmin.setBorder(border);
 
 
-        addUpdateRestButton.setBounds(80,400,200,50);
+        addUpdateRestButton.setBounds(82,410,200,50);
         addUpdateRestButton.setBackground(greyColor);
         addUpdateRestButton.setBorder(border);
         addUpdateRestButton.setFocusPainted(false);
@@ -342,8 +342,9 @@ public class View extends JFrame  {
 
 
 
+        Color sheeshColor = new Color(212, 175, 55);
         findRestByNameText.setFont(new Font("Default", Font.ITALIC, 25 ));
-        findRestByNameText.setForeground(darkGreyColor);
+        findRestByNameText.setForeground(blackColor);
         findRestByNameText.setBounds(65, 20, 400, 50);
         findRestByNameText.setOpaque(false);
         findRestByNameText.setEditable(false);
@@ -353,29 +354,29 @@ public class View extends JFrame  {
         restaurantNameUser.setBorder(border);
 
         searchByNameButton.setBounds(110,125,200,50);
-        searchByNameButton.setBackground(greyColor);
+        searchByNameButton.setBackground(sheeshColor);
         searchByNameButton.setBorder(border);
         searchByNameButton.setFocusPainted(false);
 
 
         findRestByCategoryText.setFont(new Font("Default", Font.ITALIC, 25 ));
-        findRestByCategoryText.setForeground(darkGreyColor);
+        findRestByCategoryText.setForeground(blackColor);
         findRestByCategoryText.setBounds(500, 20, 400, 50);
         findRestByCategoryText.setOpaque(false);
         findRestByCategoryText.setEditable(false);
 
-        restaurantCategoryUser.setBounds(560,70,200,25);
+        restaurantCategoryUser.setBounds(565,70,200,25);
         restaurantCategoryUser.setBorder(border);
 
 
-        searchByCategoryButton.setBounds(560,125,200,50);
-        searchByCategoryButton.setBackground(greyColor);
+        searchByCategoryButton.setBounds(565,125,200,50);
+        searchByCategoryButton.setBackground(sheeshColor);
         searchByCategoryButton.setBorder(border);
         searchByCategoryButton.setFocusPainted(false);
 
 
-        searchAllButton.setBounds(355,200,150,50);
-        searchAllButton.setBackground(greyColor);
+        searchAllButton.setBounds(810,525,65,25);
+        searchAllButton.setBackground(sheeshColor);
         searchAllButton.setBorder(border);
         searchAllButton.setFocusPainted(false);
 
@@ -384,11 +385,10 @@ public class View extends JFrame  {
         restaurantsTable.setAutoCreateColumnsFromModel(false);
         restaurantsTable.getTableHeader().setResizingAllowed(false);
         restPanel = new JScrollPane[]{new JScrollPane(restaurantsTable)};
-        //restPanel[0].setBounds(100, 400, 700, 130);
 
 
         exitFromUserButton.setBounds(834,0,50,20);
-        exitFromUserButton.setBackground(greyColor);
+        exitFromUserButton.setBackground(sheeshColor);
         exitFromUserButton.setBorder(border);
 
         exitFromUserButton.addActionListener(e->{
@@ -398,7 +398,6 @@ public class View extends JFrame  {
             homeScreenPanel.setVisible(true);
         });
 
-        //userPanel.add(restPanel[0]);
         userPanel.add(exitFromUserButton);
         userPanel.add(findRestByNameText);
         userPanel.add(restaurantNameUser);
@@ -407,8 +406,6 @@ public class View extends JFrame  {
         userPanel.add(restaurantCategoryUser);
         userPanel.add(searchByCategoryButton);
         userPanel.add(searchAllButton);
-
-
         userPanel.add(UserBack);
         this.setVisible(true);
 

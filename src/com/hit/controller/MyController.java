@@ -92,7 +92,7 @@ public class MyController implements ActionListener {
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(frame, "Fields cannot be empty or contain whitespaces.");
+                    JOptionPane.showMessageDialog(frame, "Fields cannot be empty or having invalid input.");
                 }
             }
         }
@@ -122,42 +122,13 @@ public class MyController implements ActionListener {
             else
             {
                 clearAdminRestaurantDetails();
-                JOptionPane.showMessageDialog( frame, "Fields cannot be empty or contain whitespaces.");
-            }
-        }
-
-        if(e.getSource() == view.deleteRestButton)
-        {
-            String restNameDelete = view.restaurantNameToDeleteAdmin.getText();
-            if(legalString(restNameDelete))
-            {
-
-                restNameDelete = view.restaurantNameToDeleteAdmin.getText().substring(0,1).toUpperCase()
-                        +  view.restaurantNameToDeleteAdmin.getText().substring(1).toLowerCase();
-                String response = model.deleteRest(restNameDelete);
-
-                if( response.equals("OK"))
-                {
-                    JOptionPane.showMessageDialog( frame, restNameDelete + " Restaurant was deleted successfully");
-
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog( frame, "There's no such restaurant: " + restNameDelete);
-
-                }
-                clearAdminRestaurantDetails();
-            }
-            else
-            {
-                clearAdminRestaurantDetails();
-                JOptionPane.showMessageDialog( frame, "Fields cannot be empty or contain whitespaces.");
+                JOptionPane.showMessageDialog( frame, "Fields cannot be empty or having invalid input.");
             }
         }
 
         if(e.getSource() == view.searchAllButton)
         {
-            List <Restaurant> rests = null;
+            List <Restaurant> rests;
             rests = model.getAll();
 
             if (rests == null)
@@ -181,7 +152,7 @@ public class MyController implements ActionListener {
 
                 searchRestName = view.restaurantNameUser.getText().substring(0, 1).toUpperCase()
                         + view.restaurantNameUser.getText().substring(1).toLowerCase();
-                List <Restaurant> rests = null;
+                List <Restaurant> rests ;
                 rests = model.getByName(searchRestName);
 
                 if (rests == null)
@@ -201,7 +172,7 @@ public class MyController implements ActionListener {
             else
             {
                 clearUserRestaurantDetails();
-                JOptionPane.showMessageDialog(frame, "Fields cannot be empty or contain whitespaces.");
+                JOptionPane.showMessageDialog(frame, "Fields cannot be empty or having invalid input.");
             }
         }
 
@@ -212,7 +183,7 @@ public class MyController implements ActionListener {
 
                 searchRestCategory = view.restaurantCategoryUser.getText().substring(0, 1).toUpperCase()
                         + view.restaurantCategoryUser.getText().substring(1).toLowerCase();
-                List <Restaurant> rests = null;
+                List <Restaurant> rests;
                 rests = model.getByCategory(searchRestCategory);
 
                 if (rests == null) {
@@ -232,13 +203,13 @@ public class MyController implements ActionListener {
             else
             {
                 clearUserRestaurantDetails();
-                JOptionPane.showMessageDialog(frame, "Category cannot be empty contain whitespaces or smaller then 3 letters.");
+                JOptionPane.showMessageDialog(frame, "Category cannot be empty, having invalid input or smaller than 3 letters.");
             }
         }
     }
 
 
-    public void setNewTable(List<Restaurant> restaurants)
+    private void setNewTable(List<Restaurant> restaurants)
     {
         view.userPanel.remove(view.restPanel[0]);
         view.dtm[0] = new DefaultTableModel(null, view.columns);
@@ -252,11 +223,11 @@ public class MyController implements ActionListener {
         view.restaurantsTable.getTableHeader().setResizingAllowed(false);
         view.restaurantsTable.setEnabled(false);
         view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-        view.restPanel[0].setBounds(100, 400, 700, 130);
+        view.restPanel[0].setBounds(100, 420, 700, 130);
         view.userPanel.add(view.restPanel[0]);
     }
 
-    public  void clearTable()
+    private  void clearTable()
     {
         view.userPanel.remove(view.restPanel[0]);
         view.dtm[0] = new DefaultTableModel(null, view.columns);
@@ -266,11 +237,11 @@ public class MyController implements ActionListener {
         view.restaurantsTable.getTableHeader().setResizingAllowed(false);
         view.restaurantsTable.setEnabled(false);
         view.restPanel[0] = new JScrollPane(view.restaurantsTable);
-        view.restPanel[0].setBounds(100, 400, 700, 130);
+        view.restPanel[0].setBounds(100, 420, 700, 130);
         view.userPanel.add(view.restPanel[0]);
 
     }
-    public void clearAdminRestaurantDetails()
+    private void clearAdminRestaurantDetails()
     {
         view.restaurantCategoryAdmin.setText("");
         view.restaurantNameAdmin.setText("");
@@ -281,28 +252,34 @@ public class MyController implements ActionListener {
         view.restaurantNameToDeleteAdmin.setText("");
     }
 
-    public  void clearUserRestaurantDetails()
+    private void clearUserRestaurantDetails()
     {
         view.restaurantNameUser.setText("");
         view.restaurantCategoryUser.setText("");
 
     }
 
-    public boolean legalStrings(List<String> details)
+    private boolean legalStrings(List<String> details)
     {
         for(String s: details)
         {
-            if (s.equals("") || s.contains(" "))
+            if (!legalString(s))
             {
                 return false;
             }
         }
-
         return true;
     }
 
-    public boolean legalString(String details)
+    private boolean legalString(String details)
     {
-        return !details.equals("") && !details.contains(" ");
+        return !details.equals("") && !details.contains(" ") && englishWordsOnly(details);
     }
+
+    private boolean englishWordsOnly(String details)
+    {
+        return details.matches("[a-zA-Z0-9]*");
+    }
+
+
 }
