@@ -186,7 +186,9 @@ public class MyController implements ActionListener {
 
                 if (rests == null)
                 {
-                    clearTable();
+                    if(view.dtm[0].getRowCount() > 0) {
+                        clearTable();
+                    }
                     clearUserRestaurantDetails();
                     JOptionPane.showMessageDialog(frame, "Restaurant " + searchRestName + " doesn't exist");
                 }
@@ -198,7 +200,6 @@ public class MyController implements ActionListener {
             }
             else
             {
-                clearTable();
                 clearUserRestaurantDetails();
                 JOptionPane.showMessageDialog(frame, "Fields cannot be empty or contain whitespaces.");
             }
@@ -215,7 +216,10 @@ public class MyController implements ActionListener {
                 rests = model.getByCategory(searchRestCategory);
 
                 if (rests == null) {
-                    clearTable();
+
+                    if(view.dtm[0].getRowCount() > 0) {
+                        clearTable();
+                    }
                     clearUserRestaurantDetails();
                     JOptionPane.showMessageDialog(frame, "Category " + searchRestCategory + " doesn't exist");
                 }
@@ -227,7 +231,6 @@ public class MyController implements ActionListener {
             }
             else
             {
-                clearTable();
                 clearUserRestaurantDetails();
                 JOptionPane.showMessageDialog(frame, "Category cannot be empty contain whitespaces or smaller then 3 letters.");
             }

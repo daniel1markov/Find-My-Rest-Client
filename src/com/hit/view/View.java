@@ -67,13 +67,13 @@ public class View extends JFrame  {
 
     // Background Images
     ImagePanel HomeScreenBack = new ImagePanel(
-            new ImageIcon("src/com/hit/view/1.jpg").getImage());
+            new ImageIcon("src/com/hit/view/HomePage.jpg").getImage());
     ImagePanel AdminAuthorizationBack = new ImagePanel(
-            new ImageIcon("src/com/hit/view/2.jpg").getImage());
+            new ImageIcon("src/com/hit/view/AdminPage.jpg").getImage());
     ImagePanel AdminBack = new ImagePanel(
-            new ImageIcon("src/com/hit/view/2.jpg").getImage());
+            new ImageIcon("src/com/hit/view/AdminPage.jpg").getImage());
     ImagePanel UserBack = new ImagePanel(
-            new ImageIcon("src/com/hit/view/2.jpg").getImage());
+            new ImageIcon("src/com/hit/view/AdminPage.jpg").getImage());
 
 
 
@@ -144,12 +144,13 @@ public class View extends JFrame  {
         // ------------------------------------------------------------------------------------------//
 
 
-        Color greyColor = new Color(149, 146, 146);
+        Color darkGreyColor = new Color(102, 102, 102);
+        Color greyColor = new Color(173, 173, 173);
         adminPassword.setBounds(80,90,250,25);
         adminPassword.setBorder(border);
 
         loginText.setFont(new Font("Default", Font.ITALIC, 20 ));
-        loginText.setForeground(greyColor);
+        loginText.setForeground(darkGreyColor);
         loginText.setBounds(50, 40, 350, 50);
         loginText.setOpaque(false);
         loginText.setEditable(false);
@@ -217,13 +218,13 @@ public class View extends JFrame  {
 
 
         addUpdateRestText.setFont(new Font("Default", Font.ITALIC, 25 ));
-        addUpdateRestText.setForeground(greyColor);
+        addUpdateRestText.setForeground(darkGreyColor);
         addUpdateRestText.setBounds(50, 20, 400, 50);
         addUpdateRestText.setOpaque(false);
         addUpdateRestText.setEditable(false);
 
         deleteRestText.setFont(new Font("Default", Font.ITALIC, 25 ));
-        deleteRestText.setForeground(greyColor);
+        deleteRestText.setForeground(darkGreyColor);
         deleteRestText.setBounds(590, 20, 250, 50);
         deleteRestText.setOpaque(false);
         deleteRestText.setEditable(false);
@@ -342,7 +343,7 @@ public class View extends JFrame  {
 
 
         findRestByNameText.setFont(new Font("Default", Font.ITALIC, 25 ));
-        findRestByNameText.setForeground(greyColor);
+        findRestByNameText.setForeground(darkGreyColor);
         findRestByNameText.setBounds(65, 20, 400, 50);
         findRestByNameText.setOpaque(false);
         findRestByNameText.setEditable(false);
@@ -358,7 +359,7 @@ public class View extends JFrame  {
 
 
         findRestByCategoryText.setFont(new Font("Default", Font.ITALIC, 25 ));
-        findRestByCategoryText.setForeground(greyColor);
+        findRestByCategoryText.setForeground(darkGreyColor);
         findRestByCategoryText.setBounds(500, 20, 400, 50);
         findRestByCategoryText.setOpaque(false);
         findRestByCategoryText.setEditable(false);
@@ -373,7 +374,7 @@ public class View extends JFrame  {
         searchByCategoryButton.setFocusPainted(false);
 
 
-        searchAllButton.setBounds(110,200,200,50);
+        searchAllButton.setBounds(355,200,150,50);
         searchAllButton.setBackground(greyColor);
         searchAllButton.setBorder(border);
         searchAllButton.setFocusPainted(false);
