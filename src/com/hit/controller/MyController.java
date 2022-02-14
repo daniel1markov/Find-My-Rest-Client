@@ -6,6 +6,7 @@ import com.hit.view.View;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -157,9 +158,6 @@ public class MyController implements ActionListener {
 
                 if (rests == null)
                 {
-                    if(view.dtm[0].getRowCount() > 0) {
-                        clearTable();
-                    }
                     clearUserRestaurantDetails();
                     JOptionPane.showMessageDialog(frame, "Restaurant " + searchRestName + " doesn't exist");
                 }
@@ -188,9 +186,6 @@ public class MyController implements ActionListener {
 
                 if (rests == null) {
 
-                    if(view.dtm[0].getRowCount() > 0) {
-                        clearTable();
-                    }
                     clearUserRestaurantDetails();
                     JOptionPane.showMessageDialog(frame, "Category " + searchRestCategory + " doesn't exist");
                 }
@@ -222,8 +217,10 @@ public class MyController implements ActionListener {
         view.restaurantsTable.setAutoCreateColumnsFromModel(false);
         view.restaurantsTable.getTableHeader().setResizingAllowed(false);
         view.restaurantsTable.setEnabled(false);
+        view.restaurantsTable.getTableHeader().setBackground(new Color(212, 175, 55));
         view.restPanel[0] = new JScrollPane(view.restaurantsTable);
         view.restPanel[0].setBounds(100, 420, 700, 130);
+        view.restPanel[0].getViewport().setBackground(new Color(188,144,133));
         view.userPanel.add(view.restPanel[0]);
     }
 
@@ -236,8 +233,10 @@ public class MyController implements ActionListener {
         view.restaurantsTable.setAutoCreateColumnsFromModel(false);
         view.restaurantsTable.getTableHeader().setResizingAllowed(false);
         view.restaurantsTable.setEnabled(false);
+        view.restaurantsTable.getTableHeader().setBackground(new Color(212, 175, 55));
         view.restPanel[0] = new JScrollPane(view.restaurantsTable);
         view.restPanel[0].setBounds(100, 420, 700, 130);
+        view.restPanel[0].getViewport().setBackground(new Color(188,144,133));
         view.userPanel.add(view.restPanel[0]);
 
     }
