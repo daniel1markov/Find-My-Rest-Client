@@ -394,6 +394,7 @@ public class View extends JFrame  {
         exitFromUserButton.addActionListener(e->{
             restaurantCategoryUser.setText("");
             restaurantNameUser.setText("");
+            userPanel.remove(restPanel[0]);
             userPanel.setVisible(false);
             homeScreenPanel.setVisible(true);
         });

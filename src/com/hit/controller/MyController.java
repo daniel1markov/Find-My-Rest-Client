@@ -270,14 +270,9 @@ public class MyController implements ActionListener {
         return true;
     }
 
-    private boolean legalString(String details)
+    private boolean legalString(String details) // find a way to put the "-" char
     {
-        return !details.equals("") && !details.contains(" ") && englishWordsOnly(details);
-    }
-
-    private boolean englishWordsOnly(String details)
-    {
-        return details.matches("[a-zA-Z0-9]*");
+        return details.matches("[\\S]*") && !details.equals("");
     }
 
 

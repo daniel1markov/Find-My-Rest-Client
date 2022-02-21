@@ -59,7 +59,6 @@ public class MyModel {
         headers.put("Rating", input.get(5));
         response = sendRequest(headers, "Add/Update");
         return response.json;
-
     }
 
     public String deleteRest(String restNameDelete) {
@@ -87,8 +86,7 @@ public class MyModel {
             request = new Request(headers, body);
             writer.println(gson.toJson(request));
             writer.flush();
-            Type type = new TypeToken <Response>() {
-            }.getType();
+            Type type = new TypeToken <Response>() {}.getType();
             response = gson.fromJson(reader.next(), type);
             writer.close();
             reader.close();
@@ -96,9 +94,7 @@ public class MyModel {
             return response;
         }
         catch (Exception ex){ ex.printStackTrace();}
-        return new Response("Error");
-
+        return new Response("Connection Error");
     }
-
 
 }
