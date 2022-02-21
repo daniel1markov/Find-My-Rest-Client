@@ -24,9 +24,9 @@ public class MyController implements ActionListener {
 
         this.view.searchByNameButton.addActionListener(this);
         this.view.searchByCategoryButton.addActionListener(this);
+        this.view.searchAllButton.addActionListener(this);
         this.view.addUpdateRestButton.addActionListener(this);
         this.view.deleteRestButton.addActionListener(this);
-        this.view.searchAllButton.addActionListener(this);
     }
 
     @Override
